@@ -1,0 +1,83 @@
+<section id="contact" class="contact section">
+  <div class="container">
+
+    <span class="section-label reveal">06 / Contact</span>
+
+    <div class="contact-layout">
+
+      
+      <div class="contact-left">
+        <h2 class="contact-headline reveal">
+          Let's Work<br><span class="accent">Together.</span>
+        </h2>
+
+        <p class="contact-sub reveal delay-1">
+          Open to full-time roles, freelance projects, and interesting collaborations.
+          Drop me a message and I'll get back quickly.
+        </p>
+
+        <div class="contact-links reveal delay-2">
+          <a href="mailto:mohammadalghazo2004m@gmail.com" class="contact-link">
+            <span class="link-label">Email</span>
+            <span class="link-value">mohammadalghazo2004m@gmail.com
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
+              </svg>
+            </span>
+          </a>
+          <a href="https://www.linkedin.com/in/mohammad-alghazo-106506288/" target="_blank" rel="noreferrer"
+            class="contact-link">
+            <span class="link-label">LinkedIn</span>
+            <span class="link-value">Mohammad Alghazo
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
+              </svg>
+            </span>
+          </a>
+          <a href="https://github.com/MohammadAlghazo" target="_blank" rel="noreferrer" class="contact-link">
+            <span class="link-label">GitHub</span>
+            <span class="link-value">MohammadAlghazo
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
+              </svg>
+            </span>
+          </a>
+          <div class="contact-link no-hover">
+            <span class="link-label">Location</span>
+            <span class="link-value">Ajloun, Jordan</span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="contact-right reveal delay-2">
+        <form class="contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" class="form-input" [(ngModel)]="formData.name"
+              placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-input" [(ngModel)]="formData.email"
+              placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" class="form-input form-textarea" [(ngModel)]="formData.message"
+              rows="5" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary submit-btn" [disabled]="!contactForm.form.valid">
+            Send Message
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,102 @@
+.skills-table {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.skill-row {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.22s ease;
+}
+
+.skill-row:hover {
+  background: var(--bg-surface);
+}
+
+.skill-row-inner {
+  display: grid;
+  grid-template-columns: 60px 220px 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.6rem 1rem;
+}
+
+.skill-index {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.skill-category-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.skill-row:hover .skill-tag {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.skill-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+@media (max-width: 768px) {
+  .skill-row-inner {
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.6rem 1rem;
+    padding: 1.4rem 0.5rem;
+  }
+
+  .skill-category-name {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .skill-tags {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .skill-index {
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-row-inner {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1.2rem 0;
+  }
+
+  .skill-index {
+    grid-row: auto;
+    grid-column: auto;
+  }
+}

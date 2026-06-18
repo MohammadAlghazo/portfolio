@@ -1,0 +1,45 @@
+<section id="projects" class="projects section">
+  <div class="container">
+
+    <span class="section-label reveal">04 / Works</span>
+    <h2 class="section-title reveal">Selected <span class="accent">Projects</span></h2>
+
+    <div class="projects-list">
+      <div *ngFor="let p of projects; let i = index"
+           class="project-item reveal"
+           [class]="'delay-' + (i + 1)">
+        <div class="project-item-inner">
+
+          
+          <div class="project-meta">
+            <span class="project-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            <span class="project-badge" *ngIf="p.featured">Featured</span>
+          </div>
+
+          
+          <div class="project-body">
+            <h3 class="project-title">{{ p.title }}</h3>
+            <p class="project-desc">{{ p.description }}</p>
+            <div class="project-tech">
+              <span *ngFor="let t of p.tech" class="tech-pill">{{ t }}</span>
+            </div>
+          </div>
+
+          
+          <div class="project-links">
+            <a *ngIf="p.live" [href]="p.live" target="_blank" rel="noreferrer" class="project-link">
+              Live
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+            </a>
+            <a *ngIf="p.github" [href]="p.github" target="_blank" rel="noreferrer" class="project-link">
+              GitHub
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

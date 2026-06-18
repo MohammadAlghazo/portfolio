@@ -1,0 +1,146 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 5rem;
+  align-items: start;
+}
+
+
+.about-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.about-text:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.about-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.stack-pill {
+  padding: 7px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.stack-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: sticky;
+  top: 100px;
+  padding-top: 0.5rem;
+}
+
+.stat-block {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.stat-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.stat-plus {
+  color: var(--accent);
+}
+
+.stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+
+.stat-divider {
+  height: 1px;
+  background: var(--border);
+  width: 100%;
+}
+
+
+@media (max-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .about-right {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+
+  .stat-block {
+    flex: 1;
+    min-width: 140px;
+    padding: 1.5rem 0;
+    border-right: 1px solid var(--border);
+    padding-right: 2rem;
+  }
+
+  .stat-block:last-child {
+    border-right: none;
+    padding-right: 0;
+    padding-left: 2rem;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-right {
+    flex-direction: column;
+  }
+
+  .stat-block {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .stat-block:last-child {
+    border-bottom: none;
+    padding-left: 0;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+}

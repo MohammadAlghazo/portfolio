@@ -1,0 +1,256 @@
+.hero {
+  display: block;
+  padding-top: calc(72px + 2.5rem);
+  padding-bottom: 40px;
+  overflow: hidden;
+}
+
+
+.hero-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 1.5rem;
+}
+
+.hero-index {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.3);
+  animation: ping 2.2s ease infinite;
+}
+
+@keyframes ping {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+
+  80% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+
+
+.hero-name-block {
+  margin-bottom: 2rem;
+}
+
+.hero-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 9.5vw, 9.5rem);
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 0.05em;
+}
+
+.name-row {
+  display: block;
+}
+
+.name-row--photo {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  flex-wrap: nowrap;
+}
+
+
+.hero-photo-wrap {
+  width: clamp(90px, 14vw, 190px);
+  height: clamp(90px, 14vw, 190px);
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2.5px solid var(--accent);
+  position: relative;
+  top: 0.12em;
+  will-change: transform;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-photo-wrap:hover {
+  box-shadow: 0 0 0 4px var(--accent-dim);
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s ease;
+}
+
+.hero-photo-wrap:hover .hero-photo {
+  transform: scale(1.06);
+}
+
+
+.hero-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  gap: 2rem;
+}
+
+.hero-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.hero-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.hero-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+.hero-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 2.5rem;
+  padding-bottom: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.scroll-track {
+  width: 40px;
+  height: 2px;
+  background: var(--border-strong);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: scroll-slide 2s ease-in-out infinite;
+}
+
+@keyframes scroll-slide {
+  0% {
+    left: -40%;
+  }
+
+  100% {
+    left: 140%;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .hero-name {
+    font-size: clamp(3.8rem, 12vw, 6rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 72px;
+    align-items: flex-start;
+  }
+
+  .hero-name {
+    font-size: clamp(3rem, 14vw, 5rem);
+  }
+
+  .hero-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-top: 2rem;
+  }
+
+  .hero-footer-right {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-name {
+    font-size: clamp(2.5rem, 15vw, 3.8rem);
+  }
+
+  .name-row--photo {
+    gap: 1rem;
+  }
+
+  .hero-photo-wrap {
+    width: 75px;
+    height: 75px;
+  }
+
+  .hero-topbar {
+    padding: 2rem 0 1.5rem;
+  }
+}
