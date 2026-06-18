@@ -24,29 +24,51 @@ export class App implements AfterViewInit {
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => {
 
-      const lenis = new Lenis({
-        duration: 1.1,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        touchMultiplier: 1.5,
-      });
+      // Only initialize Lenis on desktop/non-touch devices for best mobile performance
+      const isTouch = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768;
+      
+      if (!isTouch) {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          touchMultiplier: 1.5,
+        });
 
-      function raf(time: number) {
-        lenis.raf(time);
+        function raf(time: number) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+
         requestAnimationFrame(raf);
-      }
 
-      requestAnimationFrame(raf);
-
-      setTimeout(() => {
+        setTimeout(() => {
+          document.querySelectorAll('a[href^="#"]').forEach((anchor: Element) => {
+            anchor.addEventListener('click', (e) => {
+              e.preventDefault();
+              const target = anchor.getAttribute('href');
+              if (target) lenis.scrollTo(target, { duration: 1.1, offset: -80 });
+            });
+          });
+        }, 100);
+      } else {
+        // Fallback for native smooth scrolling on mobile navbar links
         document.querySelectorAll('a[href^="#"]').forEach((anchor: Element) => {
           anchor.addEventListener('click', (e) => {
             e.preventDefault();
-            const target = anchor.getAttribute('href');
-            if (target) lenis.scrollTo(target, { duration: 1.1, offset: -80 });
+            const targetId = anchor.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+              const targetEl = document.querySelector(targetId);
+              if (targetEl) {
+                window.scrollTo({
+                  top: targetEl.getBoundingClientRect().top + window.scrollY - 80,
+                  behavior: 'smooth'
+                });
+              }
+            }
           });
         });
-      }, 100);
+      }
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
