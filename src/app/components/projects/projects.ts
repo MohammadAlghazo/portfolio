@@ -11,27 +11,21 @@ export class Projects {
   projects = [
     {
       title: 'Kawadir HRMS',
-      description: 'A comprehensive Human Resource Management System built full-stack. Features include employee management, attendance tracking, payroll, leave management, role-based permissions, and a real-time dashboard. Deployed on Cloudflare Pages with a .NET backend and PostgreSQL database.',
-      tech: ['Angular', '.NET / ASP.NET Core', 'PostgreSQL', 'Cloudflare', 'Entity Framework', 'JWT Auth'],
-      github: 'https://github.com/MohammadAlghazo',
+      description: 'A production-deployed, full-stack Human Resources Management System handling employee management, payroll, attendance, and role-based access. Features a real-time dashboard and an integrated AI assistant (Groq API). Containerized with Docker, backend on Render, frontend on Cloudflare Pages.',
+      tech: ['Angular', '.NET Core', 'PostgreSQL', 'Docker', 'Render', 'Cloudflare', 'Groq API'],
+      github: 'https://github.com/MohammadAlghazo/HRMS',
       live: 'https://kawadir-hrms.pages.dev',
-      featured: true
+      featured: true,
+      logoUrl: 'hrms_logo.png'
     },
     {
-      title: 'AI-Powered Web App',
-      description: 'A Progressive Web App integrating third-party AI services via API keys to deliver intelligent features. Built with offline support and a native app-like experience across all devices.',
-      tech: ['Angular', 'OpenAI API', 'PWA', '.NET', 'REST APIs'],
-      github: 'https://github.com/MohammadAlghazo',
-      live: '',
-      featured: false
-    },
-    {
-      title: 'Cloud-Deployed REST API',
-      description: 'A scalable RESTful backend built with .NET and PostgreSQL hosted on Supabase. Implements JWT authentication, role-based access control, and is deployed on Render with media managed via Cloudinary.',
-      tech: ['.NET Core', 'PostgreSQL', 'Supabase', 'Render', 'Cloudinary', 'JWT'],
-      github: 'https://github.com/MohammadAlghazo',
-      live: '',
-      featured: false
+      title: 'StockMaster — Inventory Management',
+      description: 'A full-stack Inventory Management System built for real-world use. Tracks stock, orders, and suppliers with role-based access control and an integrated AI assistant (Groq API) for smart insights. Containerized with Docker, deployed on Render & Cloudflare Pages.',
+      tech: ['Angular', '.NET Core', 'PostgreSQL', 'Docker', 'Render', 'Cloudflare', 'Groq API'],
+      github: 'https://github.com/MohammadAlghazo/Inventory-Management-System',
+      live: 'https://stockmaster-48q.pages.dev',
+      featured: true,
+      logoUrl: 'inventory_logo.png'
     }
   ];
 }

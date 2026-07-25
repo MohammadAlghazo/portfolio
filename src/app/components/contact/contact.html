@@ -67,12 +67,22 @@
             <textarea id="message" name="message" class="form-input form-textarea" [(ngModel)]="formData.message"
               rows="5" placeholder="Tell me about your project..." required></textarea>
           </div>
-          <button type="submit" class="btn-primary submit-btn" [disabled]="!contactForm.form.valid">
-            Send Message
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <line x1="22" y1="2" x2="11" y2="13" />
-              <polygon points="22 2 15 22 11 13 2 9 22 2" />
-            </svg>
+          <div class="form-status success-msg" *ngIf="status === 'success'">
+            ✅ Message sent successfully! I'll get back to you soon.
+          </div>
+          <div class="form-status error-msg" *ngIf="status === 'error'">
+            ❌ Something went wrong. Please try emailing me directly.
+          </div>
+          <button type="submit" class="btn-primary submit-btn"
+            [disabled]="!contactForm.form.valid || status === 'sending'">
+            <span *ngIf="status !== 'sending'">
+              Send Message
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </span>
+            <span *ngIf="status === 'sending'">Sending…</span>
           </button>
         </form>
       </div>

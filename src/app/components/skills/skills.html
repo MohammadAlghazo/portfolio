@@ -12,7 +12,10 @@
           <span class="skill-index">{{ (i + 1).toString().padStart(2, '0') }}</span>
           <span class="skill-category-name">{{ cat.title }}</span>
           <div class="skill-tags">
-            <span *ngFor="let s of cat.skills" class="skill-tag">{{ s }}</span>
+            <span *ngFor="let s of cat.skills" class="skill-tag">
+              <span class="skill-icon" [innerHTML]="s.icon"></span>
+              {{ s.name }}
+            </span>
           </div>
         </div>
       </div>
