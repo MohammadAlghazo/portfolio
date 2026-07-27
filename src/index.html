@@ -19,6 +19,7 @@
   <meta name="apple-mobile-web-app-title" content="M. Alghazo">
   <meta name="theme-color" content="#0a0a0a">
   <link rel="apple-touch-icon" href="/profile.jpg">
+  <link rel="manifest" href="/manifest.webmanifest">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Mohammad Alghazo — Full-Stack Software Engineer">
@@ -35,6 +36,9 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
   <style>
+    /* Prevent white flash before Angular/CSS loads */
+    html, body { background: #0a0a0a !important; margin: 0; padding: 0; }
+
     #splash {
       position: fixed;
       inset: 0;
