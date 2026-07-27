@@ -11,6 +11,16 @@
   <meta name="keywords"
     content="Mohammad Alghazo, Full-Stack Developer, Angular, .NET, PostgreSQL, Software Engineer, Jordan">
   <meta name="author" content="Mohammad Alghazo">
+
+  <!-- PWA / iOS -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Alghazo">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="apple-touch-icon" href="/profile.jpg">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Mohammad Alghazo — Full-Stack Software Engineer">
   <meta property="og:description"
     content="Building enterprise-grade web apps from zero to cloud — Angular, .NET & AI.">
@@ -21,11 +31,143 @@
   <meta name="twitter:title" content="Mohammad Alghazo — Full-Stack Software Engineer">
   <meta name="twitter:description" content="Building enterprise-grade web apps from zero to cloud — Angular, .NET & AI.">
   <meta name="twitter:image" content="/og-image.png">
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <style>
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      background: #0a0a0a;
+      animation: splashFadeOut 0.5s ease 1.8s forwards;
+    }
+
+    #splash-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2.5px solid #F5C518;
+      box-shadow: 0 0 0 6px rgba(245, 197, 24, 0.12), 0 0 40px rgba(245, 197, 24, 0.15);
+      animation: splashPhotoIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+    }
+
+    #splash-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: splashTextIn 0.5s ease 0.6s both;
+    }
+
+    #splash-name {
+      font-family: -apple-system, 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+    }
+
+    #splash-role {
+      font-family: -apple-system, 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #F5C518;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    #splash-dot {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      color: #666;
+      animation: splashTextIn 0.5s ease 0.9s both;
+    }
+
+    #splash-dot::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+    }
+
+    #splash-loader {
+      width: 40px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 2px;
+      overflow: hidden;
+      animation: splashTextIn 0.4s ease 1s both;
+    }
+
+    #splash-loader::after {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: #F5C518;
+      border-radius: 2px;
+      animation: splashLoad 1.2s ease 1s forwards;
+    }
+
+    @keyframes splashPhotoIn {
+      from { opacity: 0; transform: scale(0.7); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes splashTextIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes splashLoad {
+      from { width: 0%; }
+      to   { width: 100%; }
+    }
+
+    @keyframes splashFadeOut {
+      from { opacity: 1; pointer-events: all; }
+      to   { opacity: 0; pointer-events: none; }
+    }
+  </style>
 </head>
 
 <body>
+
+  <!-- Custom Splash Screen -->
+  <div id="splash">
+    <img id="splash-photo" src="/profile.jpg" alt="Mohammad Alghazo">
+    <div id="splash-text">
+      <span id="splash-name">Mohammad Alghazo</span>
+      <span id="splash-role">Full-Stack Engineer</span>
+    </div>
+    <span id="splash-dot">Available for Work</span>
+    <div id="splash-loader"></div>
+  </div>
+
   <app-root></app-root>
+
+  <script>
+    // Remove splash from DOM after animation completes
+    document.getElementById('splash').addEventListener('animationend', function(e) {
+      if (e.animationName === 'splashFadeOut') {
+        this.remove();
+      }
+    });
+  </script>
+
 </body>
 
 </html>
