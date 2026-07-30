@@ -35,9 +35,16 @@
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme') ?? 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <style>
     /* Prevent white flash before Angular/CSS loads */
-    html, body { background: #0a0a0a !important; margin: 0; padding: 0; }
+    html, body { margin: 0; padding: 0; background: #0C0C0C; }
+    html[data-theme="light"], html[data-theme="light"] body { background: #F5F3EE; }
 
     #splash {
       position: fixed;
@@ -48,8 +55,12 @@
       align-items: center;
       justify-content: center;
       gap: 24px;
-      background: #0a0a0a;
+      background: #0C0C0C;
       animation: splashFadeOut 0.5s ease 1.8s forwards;
+    }
+
+    html[data-theme="light"] #splash {
+      background: #F5F3EE;
     }
 
     #splash-photo {
@@ -77,6 +88,10 @@
       font-weight: 700;
       color: #ffffff;
       letter-spacing: -0.03em;
+    }
+
+    html[data-theme="light"] #splash-name {
+      color: #111111;
     }
 
     #splash-role {
