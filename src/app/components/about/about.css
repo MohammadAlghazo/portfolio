@@ -52,15 +52,15 @@
 }
 
 .stat-block {
-  padding: 2rem 0;
+  padding: 1.35rem 0;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .stat-num {
   font-family: 'Outfit', sans-serif;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--text);

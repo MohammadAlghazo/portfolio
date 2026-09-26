@@ -4,16 +4,23 @@
     <span class="section-label reveal">04 / Works</span>
     <h2 class="section-title reveal">Selected <span class="accent">Projects</span></h2>
 
+    <!-- Primary Showcase Grid -->
     <div class="projects-list">
-      <div *ngFor="let p of projects" class="project-card reveal">
+      <div *ngFor="let p of projects; let i = index" 
+           class="project-card reveal"
+           [class.featured-card]="p.featured"
+           [class]="'delay-' + ((i % 4) + 1)">
 
         <div class="project-info">
           <div class="project-header">
             <div class="project-logo-title">
-              <img [src]="p.logoUrl" [alt]="p.title + ' Logo'" class="project-logo">
+              <img *ngIf="p.logoUrl" [src]="p.logoUrl" [alt]="p.title + ' Logo'" class="project-logo" />
+              <div *ngIf="!p.logoUrl && p.monogram" class="project-monogram">
+                {{ p.monogram }}
+              </div>
               <h3 class="project-title">{{ p.title }}</h3>
             </div>
-            <span class="project-badge" *ngIf="p.featured">Featured</span>
+            <span class="project-badge" [attr.data-badge]="p.badgeType || 'default'">{{ p.badge }}</span>
           </div>
 
           <p class="project-desc">{{ p.description }}</p>
@@ -23,17 +30,58 @@
           </div>
 
           <div class="project-links">
-            <a *ngIf="p.live && p.live !== '#'" [href]="p.live" target="_blank" rel="noreferrer" class="project-link">
-              Live
-              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+            <a *ngIf="p.live && p.live !== '#'" [href]="p.live" target="_blank" rel="noreferrer" class="project-link live-link">
+              Visit Live Platform
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+              </svg>
             </a>
-            <a *ngIf="p.github && p.github !== '#'" [href]="p.github" target="_blank" rel="noreferrer" class="project-link">
-              GitHub
-              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+            <a *ngIf="p.github && p.github !== '#'" [href]="p.github" target="_blank" rel="noreferrer" class="project-link github-link">
+              GitHub Repo
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+              </svg>
             </a>
+            <span *ngIf="!p.live && !p.github" class="project-internal-tag">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              Internal Automation Pipeline
+            </span>
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- Additional Commercial Client Deployments -->
+    <div class="client-deployments-block reveal delay-3">
+      <div class="client-header">
+        <div class="client-header-title">
+          <span class="client-dot"></span>
+          <h4>Additional Production Client Platforms</h4>
+        </div>
+        <span class="client-count">{{ clientDeployments.length }} Live Commercial Deliveries</span>
+      </div>
+
+      <div class="client-grid">
+        <a *ngFor="let client of clientDeployments" 
+           [href]="client.url" 
+           target="_blank" 
+           rel="noreferrer" 
+           class="client-card">
+          <div class="client-meta">
+            <span class="client-category">{{ client.category }}</span>
+            <h5 class="client-name">{{ client.name }}</h5>
+            <span class="client-tech">{{ client.tech }}</span>
+          </div>
+          <div class="client-arrow">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M7 17L17 7M17 7H7M17 7V17"/>
+            </svg>
+          </div>
+        </a>
       </div>
     </div>
 
