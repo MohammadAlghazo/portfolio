@@ -1,0 +1,128 @@
+@if (project; as project) {
+  <article class="project-detail container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a routerLink="/" fragment="projects">All work</a><span aria-hidden="true">/</span
+      ><span aria-current="page"><bdi [attr.lang]="project.nameLanguage">{{ project.name }}</bdi></span>
+    </nav>
+    <header class="detail-header">
+      <div>
+        <span class="section-label">{{ project.sector }}</span>
+        <h1><bdi [attr.lang]="project.nameLanguage">{{ project.name }}</bdi></h1>
+        @if (project.arabicName) {
+          <p class="arabic-name" lang="ar" dir="rtl">{{ project.arabicName }}</p>
+        }
+      </div>
+      <p class="detail-summary">{{ project.summary }}</p>
+    </header>
+    <app-project-cover [project]="project" [priority]="true" [wide]="true" />
+    <div class="project-facts">
+      <div>
+        <span>My role</span>
+        <p>{{ project.role }}</p>
+      </div>
+      <div>
+        <span>Project type</span>
+        <p>{{ project.category }}</p>
+      </div>
+      <div class="project-actions">
+        @if (project.live) {
+          <a class="text-link" [href]="project.live" target="_blank" rel="noopener noreferrer"
+            >{{ project.status === 'Client preview' ? 'Visit launch page' : 'Visit website' }}
+            <span aria-hidden="true">↗</span></a
+          >
+        }
+        @if (project.github) {
+          <a class="text-link" [href]="project.github" target="_blank" rel="noopener noreferrer"
+            >View source <span aria-hidden="true">↗</span></a
+          >
+        }
+        @if (project.status) {
+          <p class="project-status">{{ project.status }}</p>
+        }
+      </div>
+    </div>
+    <section class="story-section" aria-labelledby="context-heading">
+      <h2 id="context-heading">The context</h2>
+      <p>{{ project.challenge }}</p>
+    </section>
+    <section class="story-section" aria-labelledby="approach-heading">
+      <h2 id="approach-heading">What I built</h2>
+      <div>
+        <p>{{ project.approach }}</p>
+        <div class="feature-list">
+          @for (feature of project.features; track feature.title) {
+            <div class="feature">
+              <h3>{{ feature.title }}</h3>
+              <p>{{ feature.detail }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+    @if (media.gallery?.length) {
+      <section class="gallery-section" aria-labelledby="gallery-heading">
+        <div>
+          <span class="section-label">Inside the project</span>
+          <h2 id="gallery-heading">A closer look</h2>
+        </div>
+        <div class="project-gallery">
+          @for (image of media.gallery; track image.src) {
+            <figure>
+              <a
+                [href]="image.src"
+                target="_blank"
+                rel="noopener"
+                [attr.aria-label]="'Open full image: ' + image.alt"
+                ><img
+                  [src]="image.src"
+                  [attr.srcset]="image.srcset || null"
+                  sizes="(max-width: 800px) 100vw, 1100px"
+                  [width]="image.width"
+                  [height]="image.height"
+                  [alt]="image.alt"
+                  loading="lazy"
+                  decoding="async"
+              /></a>
+              @if (image.caption) {
+                <figcaption>{{ image.caption }}</figcaption>
+              }
+            </figure>
+          }
+        </div>
+      </section>
+    }
+    <section class="story-section stack-section" aria-labelledby="stack-heading">
+      <h2 id="stack-heading">Built with</h2>
+      <ul class="stack-list">
+        @for (tech of project.stack; track $index) {
+          <li>{{ tech }}</li>
+        }
+      </ul>
+    </section>
+    @if (next; as next) {
+      <div class="next-project">
+        <span class="section-label">Next project</span
+        ><a [routerLink]="['/projects', next.slug]"
+          ><span><bdi [attr.lang]="next.nameLanguage">{{ next.name }}</bdi></span
+          ><span aria-hidden="true">↗</span></a
+        >
+        <p>{{ next.sector }}</p>
+      </div>
+    }
+    <div class="project-contact">
+      <p>Have a project that needs this kind of thinking?</p>
+      <a routerLink="/" fragment="contact" class="text-link"
+        >Let's talk <span aria-hidden="true">↗</span></a
+      >
+    </div>
+  </article>
+} @else {
+  <section class="container missing-project">
+    <span class="section-label">Project not found</span>
+    <h1>This page took a wrong turn</h1>
+    <p>The project address may have changed. You can find the complete collection below</p>
+    <a routerLink="/" fragment="projects" class="btn-primary"
+      >Explore all work <span aria-hidden="true">→</span></a
+    >
+  </section>
+}

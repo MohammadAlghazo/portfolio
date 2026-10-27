@@ -1,0 +1,108 @@
+<div
+  class="cover"
+  [class.wide]="wide"
+  [style.--cover-bg]="project.cover.background"
+  [style.--cover-fg]="project.cover.foreground"
+  [style.--cover-accent]="project.cover.accent"
+>
+  @if (image; as image) {
+    @if (!imageFailed) {
+      <div class="image-cover">
+        <span class="image-cover-title" [attr.lang]="project.nameLanguage" dir="auto">{{ project.name }}</span>
+        <div class="image-frame">
+          <div class="image-frame-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <img
+            class="cover-image"
+            [src]="image.src"
+            [attr.srcset]="image.srcset || null"
+            [attr.sizes]="
+              wide ? '(max-width: 800px) 100vw, 1100px' : '(max-width: 650px) 100vw, 600px'
+            "
+            [width]="image.width"
+            [height]="image.height"
+            [alt]="image.alt"
+            [loading]="priority ? 'eager' : 'lazy'"
+            decoding="async"
+            (error)="imageFailed = true"
+          />
+        </div>
+      </div>
+    }
+  }
+  @if (!image || imageFailed) {
+    <div class="cover-art" aria-hidden="true">
+      <div class="cover-top">
+        <span>{{ project.sector }}</span
+        ><span>↗</span>
+      </div>
+      <svg
+        class="cover-motif"
+        viewBox="0 0 300 300"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.3"
+      >
+        @switch (project.cover.motif) {
+          @case ('architecture') {
+            <path
+              d="M50 275V90l100-60 100 60v185M50 90l100 50 100-50M150 140v135M75 105v170m25-155v155m25-143v143m50-143v143m25-155v155m25-170v170"
+            />
+          }
+          @case ('compass') {
+            <circle cx="150" cy="150" r="108" />
+            <circle cx="150" cy="150" r="83" />
+            <path
+              d="m150 45 20 85 85 20-85 20-20 85-20-85-85-20 85-20ZM150 15v30m0 210v30M15 150h30m210 0h30"
+            />
+          }
+          @case ('identity') {
+            <rect x="58" y="50" width="185" height="215" rx="8" />
+            <rect x="40" y="30" width="185" height="215" rx="8" />
+            <circle cx="133" cy="111" r="35" />
+            <path d="M80 200c0-57 106-57 106 0M79 218h107M250 50v210" />
+          }
+          @case ('dental') {
+            <path
+              d="M50 65c20-45 70-25 100-10 30-15 80-35 100 10s-10 78-25 115-10 78-30 78-18-95-45-95-25 95-45 95-15-40-30-78S30 110 50 65Z"
+            />
+            <path d="M112 64c25 9 53 8 76-1M80 98c15 35 24 64 30 98" />
+          }
+          @case ('road') {
+            <path
+              d="M20 275 125 30h50l105 245M82 275l57-245m22 0 57 245M150 50v30m0 20v35m0 25v40m0 30v45"
+            />
+            <path d="M45 120h210M30 190h240" />
+          }
+          @case ('balance') {
+            <path
+              d="M150 40v210m-62 15h124M65 90h170M150 40l-12 20h24ZM65 90 25 180h80L65 90Zm170 0-40 90h80l-40-90ZM25 180c0 45 80 45 80 0m90 0c0 45 80 45 80 0"
+            />
+          }
+          @case ('gallery') {
+            <path d="M55 30h200v240H55ZM35 10h240v280H35Z" />
+            <path d="m80 230 60-70 35 35 42-85 15 120ZM80 60h152" />
+            <circle cx="112" cy="108" r="22" />
+          }
+          @case ('thread') {
+            <path
+              d="M70 250C-20 80 215-10 225 100s-210 20-165 100 240 30 195-80S95 60 110 160s130 120 115 50M110 30 235 275"
+            />
+            <path d="m105 27 7-4 23 37-7 4Z" />
+          }
+          @default {
+            <path d="M45 250V50h65l80 130V50h65v200h-65L110 120v130Z" />
+          }
+        }
+      </svg>
+      <div class="cover-name" [class.long-name]="project.name.length > 13">
+        <span [attr.lang]="project.nameLanguage" dir="auto">{{ project.name }}</span>
+        @if (project.arabicName) {
+          <span class="cover-arabic" lang="ar" dir="rtl">{{ project.arabicName }}</span>
+        }
+      </div>
+      <p class="cover-label">{{ project.cover.label }}</p>
+    </div>
+  }
+</div>

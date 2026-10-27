@@ -1,100 +1,122 @@
-<section id="contact" class="contact section">
-  <div class="container">
-
-    <span class="section-label reveal">06 / Contact</span>
-
-    <div class="contact-layout">
-
-      
-      <div class="contact-left">
-        <h2 class="contact-headline reveal">
-          Let's Work<br><span class="accent">Together.</span>
-        </h2>
-
-        <p class="contact-sub reveal delay-1">
-          Open to full-time engineering roles, SaaS architecture, automation pipelines, and high-impact technical collaborations. Drop me a message or reach out directly.
-        </p>
-
-        <div class="contact-links reveal delay-2">
-          <a href="mailto:mohammadalghazo2004m@gmail.com" class="contact-link">
-            <span class="link-label">Email</span>
-            <span class="link-value">mohammadalghazo2004m@gmail.com
-              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
-              </svg>
-            </span>
-          </a>
-          <a href="tel:+962772913081" class="contact-link">
-            <span class="link-label">Phone</span>
-            <span class="link-value">+962 77 291 3081
-              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
-              </svg>
-            </span>
-          </a>
-          <a href="https://www.linkedin.com/in/mohammad-alghazo-106506288/" target="_blank" rel="noreferrer"
-            class="contact-link">
-            <span class="link-label">LinkedIn</span>
-            <span class="link-value">Mohammad Alghazo
-              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
-              </svg>
-            </span>
-          </a>
-          <a href="https://github.com/MohammadAlghazo" target="_blank" rel="noreferrer" class="contact-link">
-            <span class="link-label">GitHub</span>
-            <span class="link-value">MohammadAlghazo
-              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
-              </svg>
-            </span>
-          </a>
-          <div class="contact-link no-hover">
-            <span class="link-label">Location</span>
-            <span class="link-value">Amman / Sweileh &amp; Ajloun, Jordan</span>
-          </div>
-        </div>
+<section id="contact" class="contact section" aria-labelledby="contact-title">
+  <div class="container contact-layout">
+    <div>
+      <span class="section-label">Start a conversation</span>
+      <h2 id="contact-title" class="section-title">
+        Something worth<br /><span class="accent">building together?</span>
+      </h2>
+      <p class="contact-intro">
+        Open to engineering roles and thoughtful project collaborations. Tell me what you are
+        working on, or reach out directly
+      </p>
+      <div class="contact-links">
+        <a href="mailto:mohammadalghazo2004m@gmail.com"
+          ><span>Email</span
+          ><strong
+            >mohammadalghazo2004m&#64;gmail.com <span aria-hidden="true">&#8599;</span></strong
+          ></a
+        ><a href="tel:+962772913081"
+          ><span>Phone</span
+          ><strong>+962 77 291 3081 <span aria-hidden="true">&#8599;</span></strong></a
+        ><a
+          href="https://www.linkedin.com/in/mohammad-alghazo-106506288/"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><span>LinkedIn</span
+          ><strong>Mohammad Alghazo <span aria-hidden="true">&#8599;</span></strong></a
+        >
+        <p>Based in Amman, Jordan</p>
       </div>
-
-      
-      <div class="contact-right reveal delay-2">
-        <form class="contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" class="form-input" [(ngModel)]="formData.name"
-              placeholder="Your name" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-input" [(ngModel)]="formData.email"
-              placeholder="your@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" class="form-input form-textarea" [(ngModel)]="formData.message"
-              rows="5" placeholder="Tell me about your project..." required></textarea>
-          </div>
-          <div class="form-status success-msg" *ngIf="status === 'success'">
-            ✅ Message sent successfully! I'll get back to you soon.
-          </div>
-          <div class="form-status error-msg" *ngIf="status === 'error'">
-            ❌ Something went wrong. Please try emailing me directly.
-          </div>
-          <button type="submit" class="btn-primary submit-btn"
-            [disabled]="!contactForm.form.valid || status === 'sending'">
-            <span *ngIf="status !== 'sending'">
-              Send Message
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <line x1="22" y1="2" x2="11" y2="13" />
-                <polygon points="22 2 15 22 11 13 2 9 22 2" />
-              </svg>
-            </span>
-            <span *ngIf="status === 'sending'">Sending…</span>
-          </button>
-        </form>
-      </div>
-
     </div>
-
+    <form
+      #formElement
+      #contactForm="ngForm"
+      class="contact-form"
+      (ngSubmit)="onSubmit(contactForm)"
+      novalidate
+      [attr.aria-busy]="status === 'sending'"
+    >
+      <div class="form-group">
+        <label for="name">Your name</label
+        ><input
+          id="name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          maxlength="100"
+          required
+          [(ngModel)]="formData.name"
+          (blur)="touched['name'] = true"
+          [attr.aria-invalid]="showError('name')"
+          [attr.aria-describedby]="showError('name') ? 'name-error' : null"
+          placeholder="How should I address you?"
+        />
+        <p class="field-error" id="name-error">
+          @if (showError('name')) {
+            {{ errors.name }}
+          }
+        </p>
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label
+        ><input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          maxlength="254"
+          required
+          email
+          [(ngModel)]="formData.email"
+          (blur)="touched['email'] = true"
+          [attr.aria-invalid]="showError('email')"
+          [attr.aria-describedby]="showError('email') ? 'email-error' : null"
+          placeholder="you@company.com"
+        />
+        <p class="field-error" id="email-error">
+          @if (showError('email')) {
+            {{ errors.email }}
+          }
+        </p>
+      </div>
+      <div class="form-group">
+        <label for="message">What are you working on?</label
+        ><textarea
+          class="resize-none"
+          id="message"
+          name="message"
+          rows="5"
+          maxlength="5000"
+          required
+          [(ngModel)]="formData.message"
+          (blur)="touched['message'] = true"
+          [attr.aria-invalid]="showError('message')"
+          [attr.aria-describedby]="showError('message') ? 'message-error' : null"
+          placeholder="A little about the project, role, or idea"
+        ></textarea>
+        <p class="field-error" id="message-error">
+          @if (showError('message')) {
+            {{ errors.message }}
+          }
+        </p>
+      </div>
+      <div class="form-feedback" aria-live="polite" aria-atomic="true">
+        @if (status === 'success') {
+          <p class="success-msg">Your message was sent. Thanks for getting in touch</p>
+        }
+        @if (status === 'error') {
+          <p class="error-msg" role="alert">
+            Delivery could not be confirmed. Your message is still here. Please
+            <a href="mailto:mohammadalghazo2004m@gmail.com">email me directly</a> if the issue
+            continues
+          </p>
+        }
+      </div>
+      <button type="submit" class="btn-primary submit-btn" [disabled]="status === 'sending'">
+        <span>{{ status === 'sending' ? 'Sending message' : 'Send message' }}</span
+        ><span aria-hidden="true">&#8599;</span>
+      </button>
+      <p class="contact-note">Your message goes directly to my inbox</p>
+    </form>
   </div>
 </section>

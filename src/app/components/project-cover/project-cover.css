@@ -1,0 +1,159 @@
+:host {
+  display: block;
+  min-width: 0;
+  height: 100%;
+}
+.cover {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 240px;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--cover-bg);
+  color: var(--cover-fg);
+  border-radius: var(--radius);
+}
+.cover-art {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px;
+  isolation: isolate;
+}
+.cover-top {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.58rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.cover-top span:last-child {
+  font-size: 1rem;
+  line-height: 1;
+}
+.cover-motif {
+  position: absolute;
+  width: 60%;
+  height: 110%;
+  right: -5%;
+  top: -2%;
+  color: var(--cover-accent);
+  opacity: 0.4;
+  z-index: -1;
+  transition: transform 0.6s var(--ease-out);
+}
+.cover-name {
+  font: 600 clamp(2.2rem, 4vw, 4rem)/1 var(--font-display);
+  letter-spacing: -0.06em;
+  max-width: 85%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cover-name.long-name {
+  font-size: clamp(1.9rem, 3.4vw, 3.2rem);
+}
+.cover-name > [lang='ar'] {
+  font-family: 'Tahoma', sans-serif;
+  letter-spacing: 0;
+  line-height: 1.35;
+  align-self: flex-start;
+}
+.cover-arabic {
+  font:
+    400 1.1rem/1.5 'Tahoma',
+    sans-serif;
+  letter-spacing: 0;
+  align-self: flex-start;
+}
+.cover-label {
+  position: absolute;
+  bottom: 26px;
+  left: 32px;
+  right: 32px;
+  font-size: 0.64rem;
+  letter-spacing: 0.015em;
+}
+.cover.wide {
+  aspect-ratio: 2.2;
+}
+.cover.wide .cover-name {
+  font-size: clamp(3rem, 7vw, 6rem);
+}
+.image-cover {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 28px 0;
+  gap: 12px;
+}
+.image-cover-title {
+  font: 500 0.8rem/1.4 var(--font-display);
+  letter-spacing: -0.02em;
+}
+.image-frame {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+}
+.image-frame-bar {
+  display: flex;
+  gap: 4px;
+  padding: 8px 10px;
+  background: #f2f3f0;
+}
+.image-frame-bar span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #b8beb1;
+}
+.cover-image {
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  object-fit: contain;
+  object-position: top;
+}
+:host-context(a:hover) .cover-motif {
+  transform: translateY(-4px);
+}
+@media (max-width: 650px) {
+  .cover {
+    min-height: 205px;
+  }
+  .cover-art {
+    padding: 25px;
+  }
+  .cover-top {
+    top: 22px;
+    left: 25px;
+    right: 25px;
+    font-size: 0.52rem;
+  }
+  .cover-label {
+    bottom: 22px;
+    left: 25px;
+    right: 25px;
+    font-size: 0.58rem;
+  }
+  .cover-name {
+    font-size: 2.7rem;
+  }
+  .cover-name.long-name {
+    font-size: 2.3rem;
+  }
+}

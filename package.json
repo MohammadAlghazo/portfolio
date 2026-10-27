@@ -4,9 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && node tools/build-pages.cjs",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "images:prepare": "node tools/prepare-images.cjs",
+    "typecheck": "tsc --noEmit -p tsconfig.app.json",
+    "test:images": "node tools/check-images.cjs"
   },
   "prettier": {
     "printWidth": 100,

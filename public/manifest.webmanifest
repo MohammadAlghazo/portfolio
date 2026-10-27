@@ -1,14 +1,10 @@
 {
-  "name": "Mohammad Alghazo — Portfolio",
+  "name": "Mohammad Alghazo â€” Portfolio",
   "short_name": "M. Alghazo",
-  "description": "Full-Stack Software Engineer — Angular, .NET & AI",
+  "description": "Full-stack software engineer: platforms, business systems, and automation.",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#0a0a0a",
-  "theme_color": "#0a0a0a",
-  "icons": [
-    { "src": "/profile.jpg", "sizes": "192x192", "type": "image/jpeg", "purpose": "any maskable" },
-    { "src": "/profile.jpg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any maskable" }
-  ]
+  "background_color": "#f8f8f5",
+  "theme_color": "#f8f8f5",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }

@@ -1,0 +1,11 @@
+{
+  "profile": "marketing",
+  "sourceRoots": ["src"],
+  "commands": {
+    "typecheck": "npm run typecheck",
+    "test": "npm test -- --watch=false --browsers=ChromeHeadless",
+    "build": "npm run build"
+  },
+  "requiredCommands": ["typecheck", "test", "build"],
+  "evidence": { "failurePaths": "src/app/components/contact/contact.spec.ts" }
+}

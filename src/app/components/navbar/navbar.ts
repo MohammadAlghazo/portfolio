@@ -1,45 +1,52 @@
-import { Component, HostListener, ElementRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, HostListener, ViewChild, inject } from '@angular/core';
+import { Router, RouterLink, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule],
+  imports: [RouterLink],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css'
+  styleUrl: './navbar.css',
 })
 export class Navbar {
-  scrolled = false;
+  @ViewChild('menuToggle') menuToggle?: ElementRef<HTMLButtonElement>;
   menuOpen = false;
-  isDark = true;
-
-  constructor(private eRef: ElementRef) {
-    const saved = localStorage.getItem('theme') ?? 'dark';
-    this.isDark = saved === 'dark';
-    this.applyTheme();
+  isDark = document.documentElement.dataset['theme'] === 'dark';
+  readonly links = [
+    { label: 'Work', fragment: 'projects' },
+    { label: 'About', fragment: 'about' },
+    { label: 'Expertise', fragment: 'skills' },
+    { label: 'Experience', fragment: 'experience' },
+  ];
+  private readonly element = inject(ElementRef);
+  constructor() {
+    inject(Router)
+      .events.pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => (this.menuOpen = false));
   }
-
   @HostListener('document:click', ['$event'])
-  clickout(event: Event) {
-    if (this.menuOpen && !this.eRef.nativeElement.contains(event.target)) {
+  outsideClick(event: Event) {
+    if (!this.element.nativeElement.contains(event.target)) this.menuOpen = false;
+  }
+  @HostListener('document:keydown.escape')
+  escape() {
+    if (this.menuOpen) {
       this.menuOpen = false;
+      this.menuToggle?.nativeElement.focus();
     }
   }
-
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.scrolled = window.scrollY > 60;
-  }
-
-  toggleMenu() { this.menuOpen = !this.menuOpen; }
-  closeMenu() { this.menuOpen = false; }
-
   toggleTheme() {
     this.isDark = !this.isDark;
-    this.applyTheme();
-    localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-  }
-
-  private applyTheme() {
-    document.documentElement.setAttribute('data-theme', this.isDark ? 'dark' : 'light');
+    document.documentElement.dataset['theme'] = this.isDark ? 'dark' : 'light';
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', this.isDark ? '#171a16' : '#f8f8f5');
+    try {
+      localStorage.setItem('portfolio-theme', this.isDark ? 'dark' : 'light');
+    } catch {}
   }
 }

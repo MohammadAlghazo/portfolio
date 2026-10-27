@@ -1,17 +1,4 @@
-<div class="app">
-  
-  <div class="noise-overlay"></div>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  
-  <app-navbar></app-navbar>
-  <main>
-    <app-hero></app-hero>
-    <app-about></app-about>
-    <app-skills></app-skills>
-    <app-projects></app-projects>
-    <app-experience></app-experience>
-    <app-contact></app-contact>
-  </main>
-  <app-footer></app-footer>
-</div>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<app-navbar />
+<main id="main-content" tabindex="-1"><router-outlet (activate)="focusContent()" /></main>
+<app-footer />

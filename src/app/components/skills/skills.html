@@ -1,25 +1,30 @@
-<section id="skills" class="skills section">
+<section id="skills" class="section" aria-labelledby="expertise-title">
   <div class="container">
-
-    <span class="section-label reveal">03 / Skills</span>
-    <h2 class="section-title reveal">Technical <span class="accent">Arsenal</span></h2>
-
-    <div class="skills-table">
-      <div *ngFor="let cat of skillCategories; let i = index"
-           class="skill-row reveal"
-           [class]="'delay-' + (i < 6 ? (i + 1) : 6)">
-        <div class="skill-row-inner">
-          <span class="skill-index">{{ (i + 1).toString().padStart(2, '0') }}</span>
-          <span class="skill-category-name">{{ cat.title }}</span>
-          <div class="skill-tags">
-            <span *ngFor="let s of cat.skills" class="skill-tag">
-              <span class="skill-icon" [innerHTML]="s.icon"></span>
-              {{ s.name }}
-            </span>
-          </div>
-        </div>
+    <div class="expertise-heading">
+      <div>
+        <span class="section-label">Expertise, applied</span>
+        <h2 id="expertise-title" class="section-title">
+          The right tools<br /><span class="accent">A working outcome</span>
+        </h2>
       </div>
+      <p class="section-intro">
+        A stack matters most when it solves the problem in front of it. Here is where I put mine to
+        work
+      </p>
     </div>
-
+    <div class="capability-list">
+      @for (item of capabilities; track item.title) {
+        <article class="capability">
+          <h3>{{ item.title }}</h3>
+          <div>
+            <p>{{ item.description }}</p>
+            <span class="capability-tools">{{ item.tools }}</span>
+          </div>
+          <a [routerLink]="['/projects', item.slug]" class="text-link"
+            >See {{ item.example }} <span aria-hidden="true">↗</span></a
+          >
+        </article>
+      }
+    </div>
   </div>
 </section>

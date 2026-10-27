@@ -1,121 +1,74 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink, Scroll } from '@angular/router';
+import { filter, take } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PROJECTS, ProjectCategory } from '../../data/projects';
+import { ProjectCover } from '../project-cover/project-cover';
 
-export interface ProjectItem {
-  title: string;
-  badge: string;
-  badgeType?: 'featured' | 'production' | 'enterprise' | 'ai' | 'automation';
-  description: string;
-  tech: string[];
-  live?: string;
-  github?: string;
-  featured?: boolean;
-  logoUrl?: string;
-  monogram?: string;
-}
-
-export interface ClientDeployment {
-  name: string;
-  category: string;
-  url: string;
-  tech: string;
-}
-
+type Category = 'All work' | ProjectCategory;
 @Component({
   selector: 'app-projects',
-  imports: [CommonModule],
+  imports: [RouterLink, ProjectCover],
   templateUrl: './projects.html',
-  styleUrl: './projects.css'
+  styleUrl: './projects.css',
 })
 export class Projects {
-  projects: ProjectItem[] = [
-    {
-      title: 'Place On — Workspace Marketplace & SaaS',
-      badge: 'Featured SaaS',
-      badgeType: 'featured',
-      description: 'Scalable digital marketplace connecting enterprises with flexible workspaces across Saudi Arabia. Features split tenant/provider onboarding portals, multi-criteria search, inquiry request funnels, and an operational admin control room.',
-      tech: ['Next.js', 'React', 'Node.js', 'Tailwind CSS', 'MySQL', 'Coolify', 'VPS', 'Docker'],
-      live: 'https://place-on.com/',
-      featured: true,
-      monogram: 'PO'
-    },
-    {
-      title: 'Bosala (بوصلة المتاجر) — E-Commerce Intelligence SaaS',
-      badge: 'Intelligence SaaS',
-      badgeType: 'featured',
-      description: 'SaaS intelligence platform for Saudi e-commerce merchants tracking trending products, market graphs, and purchasing metrics. Powered by automated daily Python scraping pipelines feeding into Supabase.',
-      tech: ['Next.js', 'Python Automation', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Vercel'],
-      live: 'https://www.bosala.best/',
-      featured: true,
-      monogram: 'BS'
-    },
-    {
-      title: 'Trade Nox Platform Rebuild',
-      badge: 'Production Platform',
-      badgeType: 'production',
-      description: "Spearheaded the complete re-engineering of Trade Nox's flagship platform from WordPress to a high-speed custom Next.js/Node.js stack with an administrative dashboard, drastically boosting page load speeds and SEO ranking.",
-      tech: ['Next.js', 'Node.js', 'Tailwind CSS', 'VPS', 'Docker', 'SEO Architecture'],
-      live: 'https://trade-nox.com/',
-      featured: false,
-      monogram: 'TN'
-    },
-    {
-      title: 'Kawadir (كوادر) — Enterprise HRMS Platform',
-      badge: 'Enterprise HRMS',
-      badgeType: 'enterprise',
-      description: 'Full-stack HRMS managing employee lifecycles, attendance, payroll workflows, and role-based organizational hierarchies. Built with Clean Architecture, ASP.NET Core Web API, Angular, Docker, and Cloudflare.',
-      tech: ['ASP.NET Core', 'Angular', 'PostgreSQL', 'Docker', 'Cloudflare', 'Render', 'JWT/RBAC'],
-      live: 'https://kawadir-hrms.pages.dev/',
-      github: 'https://github.com/MohammadAlghazo/HRMS',
-      featured: false,
-      logoUrl: 'hrms_logo.png'
-    },
-    {
-      title: 'StockMaster — AI-Assisted Inventory Management',
-      badge: 'AI-Integrated SaaS',
-      badgeType: 'ai',
-      description: 'Smart inventory platform integrated with Groq LLM API for natural-language stock queries and automated restock suggestions based on inventory velocity. Enterprise security and containerized deployments.',
-      tech: ['ASP.NET Core', 'Angular', 'Groq API (LLM)', 'PostgreSQL', 'Docker', 'Cloudflare'],
-      live: 'https://stockmaster-48q.pages.dev/login',
-      github: 'https://github.com/MohammadAlghazo/Inventory-Management-System',
-      featured: false,
-      logoUrl: 'inventory_logo.png'
-    },
-    {
-      title: 'Python Automation & Bot Suite',
-      badge: 'Automation Suite',
-      badgeType: 'automation',
-      description: 'Custom automation bots and scraping pipelines including a real-time financial market/gold alert Telegram bot and high-speed automated booking webhook tools with cron-scheduled tasks.',
-      tech: ['Python', 'Telegram Bot API', 'Playwright', 'Webhooks', 'AsyncIO', 'Data Pipelines'],
-      featured: false,
-      monogram: 'PY'
-    }
-  ];
-
-  clientDeployments: ClientDeployment[] = [
-    {
-      name: 'Smaa Cars',
-      category: 'Automotive Marketplace',
-      url: 'https://smaacars.com/',
-      tech: 'Next.js · Node.js · Cloud VPS'
-    },
-    {
-      name: 'Clavel Dental',
-      category: 'Medical & Dental Clinic',
-      url: 'https://www.claveldental.com/',
-      tech: 'Modern Web · Responsive UI'
-    },
-    {
-      name: 'SWL Law Firm',
-      category: 'Corporate Legal Practice (KSA)',
-      url: 'https://www.swl-lawfirm.com.sa/',
-      tech: 'Corporate Portal · SEO'
-    },
-    {
-      name: 'Budgetha PWA',
-      category: 'Personal Finance Platform',
-      url: 'https://budgetha.pages.dev/?source=pwa',
-      tech: 'Progressive Web App · Cloudflare'
-    }
-  ];
+  readonly projects = PROJECTS;
+  readonly categories: Category[] = ['All work', 'Platforms', 'Client websites', 'Engineering'];
+  active: Category = 'All work';
+  expanded = false;
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  constructor() {
+    this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe((params) => {
+      const category = params.get('work') as Category;
+      this.active = this.categories.includes(category) ? category : 'All work';
+      this.expanded = params.get('all') === '1';
+    });
+  }
+  get filteredProjects() {
+    return this.projects.filter((p) => this.active === 'All work' || p.category === this.active);
+  }
+  get visibleProjects() {
+    return this.expanded ? this.filteredProjects : this.filteredProjects.slice(0, 6);
+  }
+  count(category: Category) {
+    return this.projects.filter((p) => category === 'All work' || p.category === category).length;
+  }
+  select(category: Category) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { work: category === 'All work' ? null : category, all: null },
+      queryParamsHandling: 'merge',
+      preserveFragment: true,
+      replaceUrl: true,
+    });
+  }
+  showAll() {
+    const nextProject = this.filteredProjects[this.visibleProjects.length];
+    const scroll = this.router.events
+      .pipe(
+        filter((event): event is Scroll => event instanceof Scroll),
+        take(1),
+      )
+      .subscribe(() => {
+        requestAnimationFrame(() => {
+          const article = document.getElementById('project-' + nextProject?.slug);
+          article?.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true });
+          article?.scrollIntoView({ block: 'start' });
+        });
+      });
+    this.router
+      .navigate([], {
+        relativeTo: this.route,
+        queryParams: { all: '1' },
+        queryParamsHandling: 'merge',
+        preserveFragment: true,
+        replaceUrl: true,
+      })
+      .then((navigated) => {
+        if (!navigated) scroll.unsubscribe();
+      })
+      .catch(() => scroll.unsubscribe());
+  }
 }

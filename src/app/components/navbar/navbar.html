@@ -1,44 +1,91 @@
-<nav class="navbar" [class.scrolled]="scrolled">
-  <div class="nav-inner">
-
-    <a href="#home" class="nav-logo">M<span class="nav-dot">.</span>A</a>
-
-    <div class="nav-links">
-      <a href="#about"      class="nav-link">About</a>
-      <a href="#skills"     class="nav-link">Skills</a>
-      <a href="#projects"   class="nav-link">Works</a>
-      <a href="#experience" class="nav-link">Journey</a>
-    </div>
-
+<header class="navbar">
+  <div class="container nav-inner">
+    <a routerLink="/" fragment="home" class="nav-logo" aria-label="Mohammad Alghazo, home"
+      >M<span>.</span>A</a
+    >
+    <nav class="nav-links" aria-label="Main navigation">
+      @for (link of links; track link.fragment) {
+        <a routerLink="/" [fragment]="link.fragment">{{ link.label }}</a>
+      }
+    </nav>
     <div class="nav-right">
-      <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDark ? 'Light mode' : 'Dark mode'">
-        
-        <svg *ngIf="isDark" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-        
-        <svg *ngIf="!isDark" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
+      <button
+        type="button"
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        [attr.aria-label]="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
+        [attr.aria-pressed]="isDark"
+        [title]="isDark ? 'Switch to light theme' : 'Switch to dark theme'"
+      >
+        @if (isDark) {
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+            />
+          </svg>
+        } @else {
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            aria-hidden="true"
+          >
+            <path d="M20.5 14a8.6 8.6 0 0 1-10.5-10.5A8.7 8.7 0 1 0 20.5 14Z" />
+          </svg>
+        }
       </button>
-
-      <a href="#contact" class="nav-cta">Let's Talk</a>
-
-      <button class="hamburger" [class.active]="menuOpen" (click)="toggleMenu()" aria-label="Toggle menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
+      <a routerLink="/" fragment="contact" class="nav-cta"
+        >Let's talk <span aria-hidden="true">↗</span></a
+      >
+      <button
+        #menuToggle
+        type="button"
+        class="menu-toggle"
+        (click)="menuOpen = !menuOpen"
+        [attr.aria-expanded]="menuOpen"
+        aria-controls="mobile-navigation"
+        [attr.aria-label]="menuOpen ? 'Close navigation' : 'Open navigation'"
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          aria-hidden="true"
+        >
+          @if (menuOpen) {
+            <path d="m6 6 12 12M6 18 18 6" />
+          } @else {
+            <path d="M3 8h18M3 16h18" />
+          }
+        </svg>
       </button>
     </div>
-
   </div>
-
-  
-  <div class="mobile-menu" [class.open]="menuOpen">
-    <a href="#about"      class="mobile-link" (click)="closeMenu()">About</a>
-    <a href="#skills"     class="mobile-link" (click)="closeMenu()">Skills</a>
-    <a href="#projects"   class="mobile-link" (click)="closeMenu()">Works</a>
-    <a href="#experience" class="mobile-link" (click)="closeMenu()">Journey</a>
-    <a href="#contact"    class="mobile-link mobile-cta" (click)="closeMenu()">Let's Talk →</a>
-  </div>
-</nav>
+  @if (menuOpen) {
+    <nav class="mobile-menu" id="mobile-navigation" aria-label="Mobile navigation">
+      @for (link of links; track link.fragment) {
+        <a routerLink="/" [fragment]="link.fragment" (click)="menuOpen = false"
+          >{{ link.label }} <span aria-hidden="true">↗</span></a
+        >
+      }
+      <a routerLink="/" fragment="contact" (click)="menuOpen = false"
+        >Let's talk <span aria-hidden="true">↗</span></a
+      >
+    </nav>
+  }
+</header>
